@@ -22,6 +22,7 @@ function savedata(e) {
 }
 function appendData() {
     itemList.innerHTML=null
+  
     arr.forEach((element,index) => {
        
        let div1= document.createElement('div')
@@ -37,24 +38,29 @@ function appendData() {
         span2.innerHTML=element.description;
         span3.innerHTML=element.category;
         delbtn.innerHTML="Delete"
-        delbtn.onclick=(index)=>{
+
+
+        delbtn.onclick=(e)=>{
             arr.splice(index, 1)
             localStorage.setItem("data", JSON.stringify(arr))
             appendData();
         }
+    
         editbtn.innerHTML="Edit"
-        editbtn.onclick=(e,index)=>{
-            // console.log(e.target.parentNode.childNodes[0].textContent);
+        editbtn.onclick=(e)=>{
+            console.log(e.target.parentNode.childNodes[0].textContent);
             exprenseAmount.value=e.target.parentNode.childNodes[0].textContent;
             description.value=e.target.parentNode.childNodes[4].textContent;
             Category.value=e.target.parentNode.childNodes[2].textContent
-            arr.splice(index, 1)
+            arr.splice(index,1);
             localStorage.setItem("data", JSON.stringify(arr))
             appendData();
         }
         div1.append(span1,"-",span3,"-",span2," ",delbtn,editbtn)
         itemList.append(div1)
     
-    });
+});
 }
+
+
 
